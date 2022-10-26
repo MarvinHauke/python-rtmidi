@@ -15,6 +15,7 @@ help:
 	@echo "lint - check style with flake8"
 	@echo "release - package a release"
 	@echo "release_upload - package a release and upload it to PyPI"
+	@echo "requirements - generate 'requirement-dev.txt' from 'requirements-dev.in'"
 	@echo "test - run tests on every supported Python version with tox"
 
 build: $(SOURCES)
@@ -69,6 +70,11 @@ release: clean
 
 release_upload: release
 	twine upload --skip-existing dist/*.tar.gz
+
+requirements-dev.txt: requirements-dev.in
+	pip-compile --quiet --no-emit-index-url "$<" > "$@"
+
+requirements: requirements-dev.txt
 
 test:
 	PYTHONPATH=examples $(PYTHON) setup.py test

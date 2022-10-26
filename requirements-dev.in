@@ -1,0 +1,9 @@
+coverage
+Cython
+flake8
+pip-tools
+pydocstyle
+pytest
+Sphinx
+sphinx-rtd-theme
+tox
